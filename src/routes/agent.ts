@@ -32,7 +32,7 @@ router.post('/message', async (req: Request, res: Response) => {
   const pluginResult = await detectAndRunPlugin(message);
 
   // Retrieve top 3 relevant RAG chunks
-  const ragChunks = retrieveRelevantChunks(message, 3);
+  const ragChunks = await retrieveRelevantChunks(message, 3);
 
   // Build LLM prompt
   const systemInstructions = 'You are a helpful AI agent. Answer user questions using the provided context and plugins.';

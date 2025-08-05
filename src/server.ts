@@ -1,7 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import agentRoutes from './routes/agent';
+import uploadRoutes from './routes/upload';
 import cors from 'cors';
+import { loadChunks } from './rag/rag';
 
 dotenv.config();
 const app = express();
@@ -17,8 +19,13 @@ app.get('/', (req, res) => {
 });
 
 app.use('/agent', agentRoutes);
+app.use('/upload', uploadRoutes);
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+
+(async () => {
+  await loadChunks();
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+})();
