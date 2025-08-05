@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.CORS_ORIGIN, // or use '*' for all origins (not recommended for production)
+  origin: `${process.env.CORS_ORIGIN}`, // or use '*' for all origins (not recommended for production)
   credentials: true // if you need to send cookies or auth headers
 }));
 
